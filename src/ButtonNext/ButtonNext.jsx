@@ -24,7 +24,7 @@ const ButtonNext = class ButtonNext extends React.PureComponent {
 
   static setDisabled(disabled, currentSlide, visibleSlides, totalSlides) {
     if (disabled !== null) return disabled;
-    if (currentSlide >= (totalSlides - visibleSlides)) return true;
+    if (currentSlide >= totalSlides -1) return true;
     return false;
   }
 
@@ -54,18 +54,14 @@ const ButtonNext = class ButtonNext extends React.PureComponent {
     });
   }
 
-  handleOnClick(ev) {
+  handleOnClick() {
     const {
       currentSlide, onClick, step, carouselStore,
     } = this.props;
-    const maxSlide = this.props.totalSlides - this.props.visibleSlides;
-    const newCurrentSlide = Math.min(
-      (currentSlide + step),
-      maxSlide,
-    );
+    const newCurrentSlide = currentSlide + step;
     carouselStore.setStoreState({
       currentSlide: newCurrentSlide,
-    }, onClick !== null && onClick.call(this, ev));
+    }, onClick !== null && onClick.call(this, newCurrentSlide));
   }
 
   render() {

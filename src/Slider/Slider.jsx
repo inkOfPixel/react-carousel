@@ -42,6 +42,7 @@ const Slider = class Slider extends React.Component {
     touchEnabled: PropTypes.bool.isRequired,
     trayTag: PropTypes.string,
     visibleSlides: PropTypes.number,
+    onAfterDrag: PropTypes.func,
   }
 
   static defaultProps = {
@@ -59,6 +60,7 @@ const Slider = class Slider extends React.Component {
     trayTag: 'ul',
     visibleSlides: 1,
     dragStep: 1,
+    onAfterDrag: null,
   }
 
   static slideSizeInPx(orientation, sliderTrayWidth, sliderTrayHeight, totalSlides) {
@@ -412,6 +414,7 @@ const Slider = class Slider extends React.Component {
     this.props.carouselStore.setStoreState({
       currentSlide,
     });
+    if (this.props.onAfterDrag !== null) { this.props.onAfterDrag.call(this, currentSlide); }
   }
 
   focus() {
@@ -486,6 +489,7 @@ const Slider = class Slider extends React.Component {
       touchEnabled,
       trayTag: TrayTag,
       visibleSlides,
+      onAfterDrag,
       ...props
     } = this.props;
 
@@ -505,7 +509,7 @@ const Slider = class Slider extends React.Component {
 
     // slider tray
     const trayStyle = {};
-    const trans = pct(slideSize * currentSlide * -1);
+    const trans = pct(slideSize * Math.min(currentSlide, totalSlides - visibleSlides) * -1);
 
     if (this.state.isBeingTouchDragged || this.state.isBeingMouseDragged || disableAnimation) {
       trayStyle.transition = 'none';

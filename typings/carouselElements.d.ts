@@ -10,7 +10,8 @@ interface SliderProps {
   readonly onMasterSpinner?: () => void
   readonly style?: {}
   readonly spinner?: () => void
-  readonly trayTag?: string
+  readonly trayTag?: string,
+  readonly onAfterDrag?: (n: number) => void
 }
 type SliderInterface = React.ComponentClass<SliderProps>
 /**
@@ -28,6 +29,7 @@ interface SlideProps {
   readonly innerClassName?: string
   readonly innerTag?: string
   readonly onBlur?: () => void
+  readonly onClick?: (n: number) => void
   readonly onFocus?: () => void
   readonly tabIndex?: number
   readonly tag?: string
@@ -108,7 +110,7 @@ interface ButtonNextProps {
   readonly children: React.ReactChild
   readonly className?: string
   readonly disabled?: boolean
-  readonly onClick?: (ev?: React.SyntheticEvent<HTMLButtonElement>) => void
+  readonly onClick?: (n: number) => void
 }
 type ButtonNextInterface = React.ComponentClass<ButtonNextProps>
 /**
@@ -122,7 +124,7 @@ interface ButtonBackProps {
   readonly children: React.ReactChild
   readonly className?: string
   readonly disabled?: boolean
-  readonly onClick?: (ev?: React.SyntheticEvent<HTMLButtonElement>) => void
+  readonly onClick?: (n: number) => void
 }
 type ButtonBackInterface = React.ComponentClass<ButtonBackProps>
 /**

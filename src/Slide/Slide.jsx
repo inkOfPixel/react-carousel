@@ -17,6 +17,7 @@ const Slide = class Slide extends React.PureComponent {
     naturalSlideHeight: PropTypes.number.isRequired,
     naturalSlideWidth: PropTypes.number.isRequired,
     onBlur: PropTypes.func,
+    onClick: PropTypes.func,
     onFocus: PropTypes.func,
     orientation: CarouselPropTypes.orientation.isRequired,
     slideSize: PropTypes.number.isRequired,
@@ -36,6 +37,7 @@ const Slide = class Slide extends React.PureComponent {
     innerClassName: null,
     innerTag: 'div',
     onBlur: null,
+    onClick: null,
     onFocus: null,
     style: {},
     tabIndex: null,
@@ -45,6 +47,7 @@ const Slide = class Slide extends React.PureComponent {
   constructor(props) {
     super(props);
     this.handleOnFocus = this.handleOnFocus.bind(this);
+    this.handleOnClick = this.handleOnClick.bind(this);
     this.handleOnBlur = this.handleOnBlur.bind(this);
     this.state = {
       focused: false,
@@ -64,6 +67,23 @@ const Slide = class Slide extends React.PureComponent {
     }, () => {
       if (onFocus !== null) { onFocus.call(this, ev); }
     });
+  }
+
+  handleOnClick() {
+    const {
+      carouselStore,
+      index,
+      onClick,
+      totalSlides,
+      visibleSlides,
+    } = this.props;
+    if (totalSlides - index <= visibleSlides) {
+      if (onClick !== null) { onClick.call(this, index); }
+    } else {
+      carouselStore.setStoreState({
+        currentSlide: index,
+      }, onClick !== null && onClick.call(this, index));
+    }
   }
 
   handleOnBlur(ev) {
@@ -103,6 +123,7 @@ const Slide = class Slide extends React.PureComponent {
       tag: Tag,
       totalSlides,
       visibleSlides,
+      onClick,
       ...props
     } = this.props;
 
@@ -156,6 +177,7 @@ const Slide = class Slide extends React.PureComponent {
         <InnerTag
           ref={(el) => { this.innerTagRef = el; }}
           className={newInnerClassName}
+          onClick={this.handleOnClick}
         >
           {this.props.children}
           {this.renderFocusRing()}
