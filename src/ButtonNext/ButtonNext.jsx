@@ -76,18 +76,22 @@ const ButtonNext = class ButtonNext extends React.PureComponent {
       className,
     ]);
 
-    return (
-      <button
-        type="button"
-        aria-label="next"
-        className={newClassName}
-        onClick={this.handleOnClick}
-        disabled={this.state.disabled}
-        {...props}
-      >
-        {this.props.children}
-      </button>
-    );
+    if (currentSlide < totalSlides - visibleSlides
+      && this.props.totalSlides > this.props.visibleSlides) {
+      return (
+        <button
+          type="button"
+          aria-label="next"
+          className={newClassName}
+          onClick={this.handleOnClick}
+          disabled={this.state.disabled}
+          {...props}
+        >
+          {this.props.children}
+        </button>
+      );
+    }
+    return null;
   }
 };
 

@@ -12,6 +12,8 @@ export default class ButtonBack extends React.Component {
     disabled: PropTypes.bool,
     onClick: PropTypes.func,
     step: PropTypes.number.isRequired,
+    totalSlides: PropTypes.number.isRequired,
+    visibleSlides: PropTypes.number.isRequired,
   };
 
   static defaultProps = {
@@ -66,17 +68,20 @@ export default class ButtonBack extends React.Component {
       className,
     ]);
 
-    return (
-      <button
-        type="button"
-        aria-label="previous"
-        className={newClassName}
-        onClick={this.handleOnClick}
-        disabled={this.state.disabled}
-        {...props}
-      >
-        {this.props.children}
-      </button>
-    );
+    if (currentSlide > 0 && this.props.totalSlides > this.props.visibleSlides) {
+      return (
+        <button
+          type="button"
+          aria-label="previous"
+          className={newClassName}
+          onClick={this.handleOnClick}
+          disabled={this.state.disabled}
+          {...props}
+        >
+          {this.props.children}
+        </button>
+      );
+    }
+    return null;
   }
 }
