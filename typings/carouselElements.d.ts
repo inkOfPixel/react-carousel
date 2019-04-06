@@ -36,8 +36,7 @@ interface SlideProps {
 }
 type SlideInterface = React.ComponentClass<SlideProps>
 /**
- * The Slide component is a container with an intrinsic ratio computed by the
- * CarouselProvider naturalSlideWidth and naturalSlideHeight properties.
+ * The Slide component is a container which naturally adapt to its father dimensions
  * By default, only one slide is visible in the Slider at a time.
  * You can change this by altering the visibleSlides property of the CarouselProvider.
  * Slide components also contain a div that acts as an aria compliant focus ring when

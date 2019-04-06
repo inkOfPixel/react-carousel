@@ -17,8 +17,6 @@ const CarouselProvider = class CarouselProvider extends React.Component {
     isPageScrollLocked: PropTypes.bool,
     isPlaying: PropTypes.bool,
     lockOnWindowScroll: PropTypes.bool,
-    naturalSlideHeight: PropTypes.number.isRequired,
-    naturalSlideWidth: PropTypes.number.isRequired,
     orientation: CarouselPropTypes.orientation,
     playDirection: CarouselPropTypes.direction,
     step: PropTypes.number,
@@ -68,8 +66,6 @@ const CarouselProvider = class CarouselProvider extends React.Component {
       isPlaying: props.isPlaying,
       lockOnWindowScroll: props.lockOnWindowScroll,
       masterSpinnerThreshold: 0,
-      naturalSlideHeight: props.naturalSlideHeight,
-      naturalSlideWidth: props.naturalSlideWidth,
       orientation: props.orientation,
       playDirection: props.playDirection,
       slideSize: slideSize(props.totalSlides, props.visibleSlides),
@@ -99,8 +95,6 @@ const CarouselProvider = class CarouselProvider extends React.Component {
       'hasMasterSpinner',
       'interval',
       'isPlaying',
-      'naturalSlideHeight',
-      'naturalSlideWidth',
       'lockOnWindowScroll',
       'orientation',
       'playDirection',
@@ -115,27 +109,6 @@ const CarouselProvider = class CarouselProvider extends React.Component {
         newStoreState[propName] = nextProps[propName];
       }
     });
-
-    // const { currentSlide, disableAnimation } = this.carouselStore.getStoreState();
-
-    // const isNewCurrentSlide = (
-    //   Object.prototype.hasOwnProperty.call(newStoreState, 'currentSlide')
-    //   && currentSlide !== nextProps.currentSlide
-    // );
-
-    // const isAnimationDisabled = newStoreState.disableAnimation || disableAnimation;
-
-    // if (isNewCurrentSlide && !isAnimationDisabled) {
-    //   newStoreState.disableAnimation = true;
-
-    //   // TODO: better way to do this.  Timers suck.
-    //   window.clearTimeout(this.disableAnimationTimer);
-    //   this.disableAnimationTimer = window.setTimeout(() => {
-    //     this.carouselStore.setStoreState({
-    //       disableAnimation: false,
-    //     });
-    //   }, 160);
-    // }
 
     if (
       this.props.totalSlides !== nextProps.totalSlides
@@ -176,8 +149,6 @@ const CarouselProvider = class CarouselProvider extends React.Component {
       isPageScrollLocked,
       isPlaying,
       lockOnWindowScroll,
-      naturalSlideHeight,
-      naturalSlideWidth,
       orientation,
       playDirection,
       step,

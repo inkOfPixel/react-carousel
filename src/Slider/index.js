@@ -12,8 +12,6 @@ export default WithStore(Slider, state => ({
   isPlaying: state.isPlaying,
   lockOnWindowScroll: state.lockOnWindowScroll,
   masterSpinnerFinished: state.masterSpinnerFinished,
-  naturalSlideHeight: state.naturalSlideHeight,
-  naturalSlideWidth: state.naturalSlideWidth,
   orientation: state.orientation,
   playDirection: state.playDirection,
   slideSize: state.slideSize,

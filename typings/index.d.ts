@@ -38,8 +38,6 @@ interface CarouselState {
   readonly lockOnWindowScroll: boolean
   readonly masterSpinnerFinished: boolean
   readonly masterSpinnerThreshold: number
-  readonly naturalSlideHeight: number
-  readonly naturalSlideWidth: number
   readonly orientation: 'horizontal' | 'vertical'
   readonly slideSize: number
   readonly slideTraySize: number
@@ -61,8 +59,6 @@ interface CarouselProviderProps {
   readonly interval?: number
   readonly isPlaying?: boolean
   readonly lockOnWindowScroll?: CarouselState['lockOnWindowScroll']
-  readonly naturalSlideHeight: CarouselState['naturalSlideHeight']
-  readonly naturalSlideWidth: CarouselState['naturalSlideWidth']
   readonly playDirection?: 'forward'|'backward'
   readonly orientation?: CarouselState['orientation']
   readonly step?: CarouselState['step']
@@ -78,14 +74,8 @@ type CarouselProviderInterface = React.ComponentClass<CarouselProviderProps>
 /**
  * CarouselProvider allows the other carousel components to communicate with each other.
  *
- * The only required properties are:
- * the orientation, naturalSlideWidth, and naturalSlideHeight.
- *
- * The naturalSlideWidth and naturalSlideHeight are used
- * to create an aspect ratio for each slide.
- *
  * Since the carousel is responsive by default,
- * it will stretch to fill in the width of it's parent container.
+ * it will stretch to fill in the width and height of it's parent container.
  *
  * The CarouselProvider must also have children.
  */

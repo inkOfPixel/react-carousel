@@ -14,8 +14,6 @@ const Slide = class Slide extends React.PureComponent {
     index: PropTypes.number.isRequired,
     innerClassName: PropTypes.string,
     innerTag: PropTypes.string,
-    naturalSlideHeight: PropTypes.number.isRequired,
-    naturalSlideWidth: PropTypes.number.isRequired,
     onBlur: PropTypes.func,
     onClick: PropTypes.func,
     onFocus: PropTypes.func,
@@ -112,8 +110,6 @@ const Slide = class Slide extends React.PureComponent {
       index,
       innerClassName,
       innerTag: InnerTag,
-      naturalSlideHeight,
-      naturalSlideWidth,
       onBlur,
       onFocus,
       orientation,
@@ -132,11 +128,10 @@ const Slide = class Slide extends React.PureComponent {
     if (orientation === 'horizontal') {
       tempStyle.width = pct(slideSize);
     } else {
-      tempStyle.width = pct(100);
-      tempStyle.paddingBottom = pct((naturalSlideHeight * 100) / naturalSlideWidth);
+      tempStyle.height = pct(slideSize);
     }
 
-    const newStyle = Object.assign({}, tempStyle, style);
+    const newStyle = Object.assign({ height: '100%', overflow: 'hidden' }, tempStyle, style);
 
     const isVisible = this.isVisible();
 
@@ -170,7 +165,7 @@ const Slide = class Slide extends React.PureComponent {
         onFocus={this.handleOnFocus}
         onBlur={this.handleOnBlur}
         className={newClassName}
-        style={{ ...newStyle, height: '100%', overflow: 'hidden' }}
+        style={newStyle}
         {...props}
       >
         <InnerTag

@@ -26,8 +26,6 @@ const Slider = class Slider extends React.Component {
     lockOnWindowScroll: PropTypes.bool.isRequired,
     masterSpinnerFinished: PropTypes.bool.isRequired,
     moveThreshold: PropTypes.number,
-    naturalSlideHeight: PropTypes.number.isRequired,
-    naturalSlideWidth: PropTypes.number.isRequired,
     onMasterSpinner: PropTypes.func,
     orientation: CarouselPropTypes.orientation.isRequired,
     playDirection: CarouselPropTypes.direction.isRequired,
@@ -475,8 +473,6 @@ const Slider = class Slider extends React.Component {
       lockOnWindowScroll,
       masterSpinnerFinished,
       moveThreshold,
-      naturalSlideHeight,
-      naturalSlideWidth,
       onMasterSpinner,
       orientation,
       playDirection,
@@ -493,19 +489,12 @@ const Slider = class Slider extends React.Component {
       ...props
     } = this.props;
 
-    const sliderStyle = Object.assign({}, style);
+    const sliderStyle = Object.assign({ height: '100%' }, style);
 
     // slider tray wrap
     const trayWrapStyle = {};
-
-    if (orientation === 'vertical') {
-      trayWrapStyle.height = 0;
-      trayWrapStyle.paddingBottom = pct(
-        (naturalSlideHeight * 100 * visibleSlides) / naturalSlideWidth,
-      );
-      trayWrapStyle.width = pct(100);
-    }
-
+    trayWrapStyle.height = pct(100);
+    trayWrapStyle.width = pct(100);
 
     // slider tray
     const trayStyle = {};
@@ -520,10 +509,12 @@ const Slider = class Slider extends React.Component {
     }
 
     if (orientation === 'vertical') {
-      trayStyle.transform = `translateY(${trans}) translateY(${this.state.deltaY}px)`;
       trayStyle.width = pct(100);
+      trayStyle.height = pct(slideTraySize);
+      trayStyle.transform = `translateY(${trans}) translateY(${this.state.deltaY}px)`;
     } else {
       trayStyle.width = pct(slideTraySize);
+      trayStyle.height = pct(100);
       trayStyle.transform = `translateX(${trans}) translateX(${this.state.deltaX}px)`;
     }
 
@@ -563,17 +554,17 @@ const Slider = class Slider extends React.Component {
         ref={(el) => { this.sliderElement = el; }}
         className={sliderClasses}
         aria-live="polite"
-        style={{ ...sliderStyle, height: '100%' }}
+        style={sliderStyle}
         tabIndex={newTabIndex}
         onKeyDown={this.handleOnKeyDown}
         role="listbox"
         {...rest}
       >
-        <div className={trayWrapClasses} style={{ ...trayWrapStyle, height: '100%' }}>
+        <div className={trayWrapClasses} style={trayWrapStyle}>
           <TrayTag
             ref={this.getSliderRef}
             className={trayClasses}
-            style={{ ...trayStyle, height: '100%' }}
+            style={trayStyle}
             onTouchStart={this.handleOnTouchStart}
             onTouchMove={this.handleOnTouchMove}
             onTouchEnd={this.handleOnTouchEnd}
