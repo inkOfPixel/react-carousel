@@ -563,17 +563,17 @@ const Slider = class Slider extends React.Component {
         ref={(el) => { this.sliderElement = el; }}
         className={sliderClasses}
         aria-live="polite"
-        style={sliderStyle}
+        style={{ ...sliderStyle, height: '100%' }}
         tabIndex={newTabIndex}
         onKeyDown={this.handleOnKeyDown}
         role="listbox"
         {...rest}
       >
-        <div className={trayWrapClasses} style={trayWrapStyle}>
+        <div className={trayWrapClasses} style={{ ...trayWrapStyle, height: '100%' }}>
           <TrayTag
             ref={this.getSliderRef}
             className={trayClasses}
-            style={trayStyle}
+            style={{ ...trayStyle, height: '100%' }}
             onTouchStart={this.handleOnTouchStart}
             onTouchMove={this.handleOnTouchMove}
             onTouchEnd={this.handleOnTouchEnd}

@@ -131,7 +131,6 @@ const Slide = class Slide extends React.PureComponent {
 
     if (orientation === 'horizontal') {
       tempStyle.width = pct(slideSize);
-      tempStyle.paddingBottom = pct((naturalSlideHeight * 100) / (naturalSlideWidth * totalSlides));
     } else {
       tempStyle.width = pct(100);
       tempStyle.paddingBottom = pct((naturalSlideHeight * 100) / naturalSlideWidth);
@@ -171,7 +170,7 @@ const Slide = class Slide extends React.PureComponent {
         onFocus={this.handleOnFocus}
         onBlur={this.handleOnBlur}
         className={newClassName}
-        style={newStyle}
+        style={{ ...newStyle, height: '100%', overflow: 'hidden' }}
         {...props}
       >
         <InnerTag

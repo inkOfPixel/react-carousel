@@ -195,7 +195,7 @@ const CarouselProvider = class CarouselProvider extends React.Component {
       this.props.className,
     ]);
 
-    return <Tag className={newClassName} {...filteredProps}>{this.props.children}</Tag>;
+    return <Tag className={newClassName} style={{ height: '100%' }} {...filteredProps}>{this.props.children}</Tag>;
   }
 };
 
