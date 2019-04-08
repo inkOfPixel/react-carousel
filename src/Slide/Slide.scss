@@ -15,7 +15,7 @@
   }
 
   &Inner {
-    position: absolute;
+    position: relative;
     top: 0;
     left: 0;
     width: 100%;
@@ -34,7 +34,7 @@
   outline-style: solid;
   outline-color: Highlight;
 
-  @media (-webkit-min-device-pixel-ratio:0) {
+  @media (-webkit-min-device-pixel-ratio: 0) {
     outline-style: auto;
     outline-color: -webkit-focus-ring-color;
   }
