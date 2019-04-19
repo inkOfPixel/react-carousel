@@ -22,17 +22,16 @@ export default class ButtonBack extends React.Component {
     onClick: null,
   }
 
-  static setDisabled(disabled, currentSlide) {
-    if (disabled !== null) return disabled;
-    if (currentSlide === 0) return true;
-    return false;
+  static setDisabled(props) {
+    if (props.disabled !== null) return props.disabled;
+    return props.currentSlide === 0 || props.totalSlides <= props.visibleSlides;
   }
 
   constructor(props) {
     super(props);
     this.handleOnClick = this.handleOnClick.bind(this);
     this.state = {
-      disabled: ButtonBack.setDisabled(props.disabled, props.currentSlide),
+      disabled: ButtonBack.setDisabled(props),
     };
   }
 
@@ -40,7 +39,7 @@ export default class ButtonBack extends React.Component {
   /* istanbul ignore next */
   componentWillReceiveProps(nextProps) {
     this.setState({
-      disabled: ButtonBack.setDisabled(nextProps.disabled, nextProps.currentSlide),
+      disabled: ButtonBack.setDisabled(nextProps),
     });
   }
 
@@ -69,20 +68,17 @@ export default class ButtonBack extends React.Component {
       className,
     ]);
 
-    if (currentSlide > 0 && this.props.totalSlides > this.props.visibleSlides) {
-      return (
-        <button
-          type="button"
-          aria-label="previous"
-          className={newClassName}
-          onClick={this.handleOnClick}
-          disabled={this.state.disabled}
-          {...props}
-        >
-          {this.props.children}
-        </button>
-      );
-    }
-    return null;
+    return (
+      <button
+        type="button"
+        aria-label="previous"
+        className={newClassName}
+        onClick={this.handleOnClick}
+        disabled={this.state.disabled}
+        {...props}
+      >
+        {this.props.children}
+      </button>
+    );
   }
 }
