@@ -76,7 +76,7 @@ const ButtonNext = class ButtonNext extends React.PureComponent {
       className,
     ]);
 
-    return totalSlides <= visibleSlides ? (
+    return totalSlides > visibleSlides ? (
       <button
         type="button"
         aria-label="next"
