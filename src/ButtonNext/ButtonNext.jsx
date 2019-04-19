@@ -76,7 +76,7 @@ const ButtonNext = class ButtonNext extends React.PureComponent {
       className,
     ]);
 
-    return (
+    return totalSlides <= visibleSlides ? (
       <button
         type="button"
         aria-label="next"
@@ -87,7 +87,7 @@ const ButtonNext = class ButtonNext extends React.PureComponent {
       >
         {this.props.children}
       </button>
-    );
+    ) : null;
   }
 };
 
