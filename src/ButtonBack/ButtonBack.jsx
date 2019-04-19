@@ -68,7 +68,7 @@ export default class ButtonBack extends React.Component {
       className,
     ]);
 
-    return (
+    return totalSlides <= visibleSlides ? (
       <button
         type="button"
         aria-label="previous"
@@ -79,6 +79,6 @@ export default class ButtonBack extends React.Component {
       >
         {this.props.children}
       </button>
-    );
+    ) : null;
   }
 }
